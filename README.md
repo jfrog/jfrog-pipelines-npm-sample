@@ -1,0 +1,1 @@
+# jfrog-pipelines-npm-sample
