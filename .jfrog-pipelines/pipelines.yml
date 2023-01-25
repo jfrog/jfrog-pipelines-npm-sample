@@ -13,13 +13,13 @@ resources:
         # Specifies which branches will trigger dependent steps
         include: master
 
-  - name: npm_buildinfo
+  - name: npm_buildinfo_jfp_example
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
 
 pipelines:
-  - name: npm_pipeline_jfp_example
+  - name: npm_pipeline
     steps:
       - name: npm_build_step
         type: NpmBuild
