@@ -1,4 +1,4 @@
-template: true   # required for local templates
+#template: true   # required for local templates
 valuesFilePath: ./values.yml
 
 resources:
@@ -13,7 +13,7 @@ resources:
         # Specifies which branches will trigger dependent steps
         include: master
 
-  - name: npm_buildinfo_jfp_example
+  - name: npm_buildinfo
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
