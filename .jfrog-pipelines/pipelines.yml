@@ -16,7 +16,7 @@ resources:
   - name: npm_buildinfo_jfp_example
     type: BuildInfo
     configuration:
-      sourceArtifactory: demoArt
+      sourceArtifactory: {{ .Values.myRepo.artifactory }}
 
 pipelines:
   - name: npm_pipeline_jfp_example
@@ -27,7 +27,7 @@ pipelines:
           repositoryName: npm-virtual      # required, npm repository name on artifacctory
           sourceLocation: .      # required, location of package.json file
           integrations:
-            - name:  demoArt  # required
+            - name:  {{ .Values.myRepo.artifactory }}  # required
           inputResources:
             - name: npm_repo_jfp_example         # required
 
@@ -38,7 +38,7 @@ pipelines:
           repositoryName: npm-virtual        # required, npm repository name on artifactory
           autoPublishBuildInfo: true       # optional
           integrations:
-            - name: demoArt      # required
+            - name: {{ .Values.myRepo.artifactory }}      # required
           inputSteps:
             - name: npm_build_step                # required
           outputResources:
