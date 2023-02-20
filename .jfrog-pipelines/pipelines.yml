@@ -19,7 +19,7 @@ resources:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
 
 pipelines:
-  - name: npm_pipeline
+  - name: Npm_Quickstart
     steps:
       - name: npm_build_step
         type: NpmBuild
