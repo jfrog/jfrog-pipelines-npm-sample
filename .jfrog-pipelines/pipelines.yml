@@ -18,7 +18,7 @@ resources:
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
       
-  - name: cron_trigger
+  - name: cron_trigger_npm
     type: CronTrigger
     configuration:
       interval: '0 1 * * *'       
@@ -35,7 +35,7 @@ pipelines:
             - name:  {{ .Values.myRepo.artifactory }}  # required
           inputResources:
             - name: npm_repo_jfp_example         # required
-            - name: cron_trigger
+            - name: cron_trigger_npm
 
       - name: npm_publish_step
         type: NpmPublish
