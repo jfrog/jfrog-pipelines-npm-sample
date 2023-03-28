@@ -21,7 +21,7 @@ resources:
   - name: cron_trigger_npm
     type: CronTrigger
     configuration:
-      interval: '0 1 * * *'       
+      interval: '0 3 * * *'       
 
 pipelines:
   - name: Npm_Quickstart
