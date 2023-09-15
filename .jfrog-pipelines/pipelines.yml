@@ -29,7 +29,7 @@ pipelines:
       - name: npm_build_step
         type: NpmBuild
         configuration:
-          repositoryName: venortso-npm-test     # required, npm repository name on artifacctory
+          repositoryName: venortso-test-npm     # required, npm repository name on artifacctory
           sourceLocation: .      # required, location of package.json file
           integrations:
             - name:  {{ .Values.myRepo.artifactory }}  # required
@@ -41,7 +41,7 @@ pipelines:
         type: NpmPublish
         configuration:
           # for payloadType npm:
-          repositoryName: venortso-npm-test      # required, npm repository name on artifactory
+          repositoryName: venortso-test-npm      # required, npm repository name on artifactory
           autoPublishBuildInfo: true       # optional
           integrations:
             - name: {{ .Values.myRepo.artifactory }}      # required
