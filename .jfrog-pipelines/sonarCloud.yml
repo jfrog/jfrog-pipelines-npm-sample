@@ -13,8 +13,9 @@ pipelines:
 
       - name: clone_repository
         type: Bash
-        inputSteps:
-            - name: install_sonar_scanner
+        configuration:
+          inputSteps:
+              - name: install_sonar_scanner
         execution:
           onExecute: 
             - git clone https://github.com/venortso/jfrog-pipelines-npm-sample
@@ -25,14 +26,14 @@ pipelines:
           inputSteps:
             - name: install_sonar_scanner
             - name: clone_repository
-          execution:
-            onExecute:
-              - cd my-github-repo
-              - sonar-scanner \
-                -Dsonar.projectKey=my-github-repo \
-                -Dsonar.sources=. \
-                -Dsonar.host.url=https://sonarcloud.io \
-                -Dsonar.login=your-sonar-token
+        execution:
+          onExecute:
+            - cd my-github-repo
+            - sonar-scanner \
+              -Dsonar.projectKey=my-github-repo \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.login=your-sonar-token
           
 
       # - name: publish_scan_results
