@@ -16,7 +16,7 @@ resources:
   - name: npm_buildinfo_jfp_example
     type: BuildInfo
     configuration:
-      sourceArtifactory: {{ .Values.myRepo.artifactory }}
+      sourceArtifactory: venortso_artifactory
       
   - name: cron_trigger_npm
     type: CronTrigger
@@ -41,7 +41,7 @@ pipelines:
         type: NpmPublish
         configuration:
           # for payloadType npm:
-          repositoryName: quickstarts-npm-virtual        # required, npm repository name on artifactory
+          repositoryName: venortso-npm-challenge       # required, npm repository name on artifactory
           autoPublishBuildInfo: true       # optional
           integrations:
             - name: {{ .Values.myRepo.artifactory }}      # required
