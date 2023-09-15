@@ -30,10 +30,10 @@ pipelines:
           onExecute:
             - cd my-github-repo
             - sonar-scanner \
-              -Dsonar.projectKey=my-github-repo \
-              -Dsonar.sources=. \
+              -Dsonar.organization=venortso \
+              -Dsonar.projectKey=venortso_jfrog-pipelines-npm-sample \
               -Dsonar.host.url=https://sonarcloud.io \
-              -Dsonar.login=your-sonar-token
+              -Dsonar.token=sqp_3d80be21b7d97955249211438857fc7d7c70eb5f
           
 
       # - name: publish_scan_results
