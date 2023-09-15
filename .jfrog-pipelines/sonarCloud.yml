@@ -20,7 +20,7 @@ pipelines:
             - git clone https://github.com/venortso/jfrog-pipelines-npm-sample
 
       - name: sonar_scan
-        type: Bash
+        type: Bash 
         configuration:
           inputSteps:
             - name: install_sonar_scanner
