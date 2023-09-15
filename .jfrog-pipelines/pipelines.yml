@@ -24,12 +24,12 @@ resources:
       interval: '0 3 * * *'       
 
 pipelines:
-  - name: Npm_Quickstart
+  - name: venortso_npm_test
     steps:
       - name: npm_build_step
         type: NpmBuild
         configuration:
-          repositoryName: quickstarts-npm-virtual      # required, npm repository name on artifacctory
+          repositoryName: venortso-npm-challenge      # required, npm repository name on artifacctory
           sourceLocation: .      # required, location of package.json file
           integrations:
             - name:  {{ .Values.myRepo.artifactory }}  # required
