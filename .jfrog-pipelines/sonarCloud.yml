@@ -1,0 +1,50 @@
+pipelines:
+  - name: sonar_scan_and_upload
+    steps:
+      - name: install_sonar_scanner
+        type: Shell
+        configuration:
+          script: |
+            #!/bin/bash
+            # Install SonarScanner CLI
+            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+            unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+            export PATH=$PATH:$PWD/sonar-scanner-cli-4.6.2.2472-linux/bin
+
+      - name: clone_repository
+        type: Shell
+        configuration:
+          script: |
+            #!/bin/bash
+            # Clone the GitHub repository
+            git clone https://github.com/venortso/jfrog-pipelines-npm-sample
+
+      - name: sonar_scan
+        type: Shell
+        configuration:
+          inputResources:
+            - name: install_sonar_scanner
+            - name: clone_repository
+          script: |
+            #!/bin/bash
+            # Navigate to the cloned repository
+            cd my-github-repo
+
+            # Run SonarScanner
+            sonar-scanner \
+              -Dsonar.projectKey=my-github-repo \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.login=your-sonar-token
+
+      # - name: publish_scan_results
+      #   type: JFrogArtifactoryPublish
+      #   configuration:
+      #     inputResources:
+      #       - name: my-github-repo
+      #     buildName: sonar_scan
+      #     buildNumber: 1.0.0  #
+      #     targetRepo: venorto-test-npm
+
+
+
