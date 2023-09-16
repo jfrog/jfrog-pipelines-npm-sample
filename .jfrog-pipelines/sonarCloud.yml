@@ -28,7 +28,7 @@ pipelines:
             - name: clone_repository
         execution:
           onExecute:
-            - cd my-github-repo
+            - cd jfrog-pipelines-npm-sample
             - sonar-scanner \
               -Dsonar.organization=venortso \
               -Dsonar.projectKey=venortso_jfrog-pipelines-npm-sample \
