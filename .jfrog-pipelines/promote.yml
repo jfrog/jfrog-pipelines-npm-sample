@@ -36,7 +36,6 @@ pipelines:
           comment: "Promoting to 1.0.1"
           inputResources:
             - name: app_buildinfo    # required
-              trigger: false
           outputResources:
             - name: app_promoted_buildinfo   # required
 
