@@ -12,12 +12,12 @@ resources:
   - name: app_buildinfo
     type: BuildInfo
     configuration:
-      sourceArtifactory: {{ .Values.artifactory }}
+      sourceArtifactory: {{ .Values.myRepo.artifactory }}
 
   - name: app_promoted_buildinfo
     type: BuildInfo
     configuration:
-      sourceArtifactory: {{ .Values.artifactory }}
+      sourceArtifactory: {{ .Values.myRepo.artifactory }}
 
 pipelines:
   - name:   venortso-npm-promote
