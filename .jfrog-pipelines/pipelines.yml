@@ -17,6 +17,8 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: venortso_artifactory
+      buildName: npm_build
+      buildNumber: 1.0.0
       
   - name: cron_trigger_npm
     type: CronTrigger
@@ -24,7 +26,7 @@ resources:
       interval: '0 3 * * *'       
 
 pipelines:
-  - name: venortso_npm_test
+  - name: venortso_npm
     steps:
       - name: npm_build_step
         type: NpmBuild
