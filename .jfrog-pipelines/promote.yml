@@ -1,0 +1,45 @@
+resources:
+  - name: app_repo
+    type: GitRepo
+    configuration:
+      gitProvider: {{ .Values.myRepo.gitProvider }}
+      path: {{ .Values.myRepo.path }}
+      branches:
+        include: master
+
+  - name: app_buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: {{ .Values.artifactoryIntegration }}
+
+  - name: app_promoted_buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: {{ .Values.artifactoryIntegration }}
+
+pipelines:
+  - name:   venortso-npm-promote
+    steps:
+      - name: promote
+        type: PromoteBuild
+        configuration:
+          #inherits all the tags from bash
+          targetRepository: app_repo
+          includeDependencies:   false
+          status:  "promoted-status"
+          comment: "Testing promotion"
+          inputResources:
+            - name: app_buildinfo    # required
+              trigger: false
+          outputResources:
+            - name: app_promoted_buildinfo   # required
+
+        execution:
+          onStart:
+            - echo "Preparing for work..."
+          onSuccess:
+            - echo "Job well done!"
+          onFailure:
+            - echo "uh oh, something went wrong"
+          onComplete: #always
+            - echo "Cleaning up some stuff"
