@@ -1,15 +1,15 @@
 valuesFilePath: ./values.yml
 
 resources:
-  - name: app_repo
-    type: GitRepo
-    configuration:
-      gitProvider: {{ .Values.myRepo.gitProvider }}
-      path: {{ .Values.myRepo.path }}
-      branches:
-        include: master
+  # - name: app_repo
+  #   type: GitRepo
+  #   configuration:
+  #     gitProvider: {{ .Values.myRepo.gitProvider }}
+  #     path: {{ .Values.myRepo.path }}
+  #     branches:
+  #       include: master
 
-  - name: app_buildinfo
+  - name: app_pre_promoted_buildinfo
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
@@ -26,7 +26,7 @@ resources:
 pipelines:
   - name: venortso_npm_promote
     steps:
-      - name: BashFetch
+      - name: fetch_conditions
         type: Bash
         inputResources:
         - name: app_repo
@@ -48,7 +48,7 @@ pipelines:
           status:  "promoted-status"
           comment: "Promoting to 1.0.1"
           inputResources:
-            - name: app_buildinfo    # required
+            - name: app_pre_promoted_buildinfo   # required
           outputResources:
             - name: app_promoted_buildinfo   # required
 
