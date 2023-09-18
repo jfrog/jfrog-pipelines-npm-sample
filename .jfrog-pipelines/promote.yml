@@ -20,7 +20,7 @@ resources:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
 
 pipelines:
-  - name:   venortso-npm-promote
+  - name: venortso_npm_promote
     steps:
       - name: promote
         type: PromoteBuild
