@@ -20,10 +20,10 @@ resources:
       buildName: npm_build
       buildNumber: 1.0.0
       
-  - name: cron_trigger_npm
-    type: CronTrigger
-    configuration:
-      interval: '0 3 * * *'       
+  # - name: cron_trigger_npm
+  #   type: CronTrigger
+  #   configuration:
+  #     interval: '0 3 * * *'       
 
 pipelines:
   - name: venortso_npm
@@ -37,7 +37,7 @@ pipelines:
             - name:  {{ .Values.myRepo.artifactory }}  # required
           inputResources:
             - name: npm_repo_jfp_venortso         # required
-            - name: cron_trigger_npm
+            # - name: cron_trigger_npm
 
       - name: npm_publish_step
         type: NpmPublish
