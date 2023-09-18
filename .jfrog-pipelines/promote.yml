@@ -1,0 +1,61 @@
+valuesFilePath: ./values.yml
+
+resources:
+  - name: app_repo
+    type: GitRepo
+    configuration:
+      gitProvider: {{ .Values.myRepo.gitProvider }}
+      path: {{ .Values.myRepo.path }}
+      branches:
+        include: master
+
+  - name: app_buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: {{ .Values.myRepo.artifactory }}
+      buildName: venortso_npm
+      buildNumber: 3
+
+  - name: app_promoted_buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: {{ .Values.myRepo.artifactory }}
+      buildName: npm_build
+      buildNumber: 1.0.1
+
+pipelines:
+  - name: venortso_npm_promote
+    steps:
+      - name: BashFetch
+          type: Bash
+
+          execution:
+              onExecute:
+                - echo "Running Bash"
+                - add_run_variables promote="true"
+              onComplete:
+                 - echo "promote = ${promote}"
+                 
+      - name: promote
+        type: PromoteBuild
+        configuration:
+          condition: promote == "true"
+          #inherits all the tags from bash
+          targetRepository: app_repo
+          includeDependencies:   false
+          status:  "promoted-status"
+          comment: "Promoting to 1.0.1"
+          inputResources:
+            - name: app_buildinfo    # required
+          outputResources:
+            - name: app_promoted_buildinfo   # required
+
+        execution:
+          onStart:
+            - echo "Preparing for work..."
+          onSuccess:
+            - echo "Job well done!"
+          onFailure:
+            - echo "uh oh, something went wrong"
+          onComplete: #always
+            - echo "Cleaning up some stuff"
