@@ -1,3 +1,5 @@
+valuesFilePath: ./values.yml
+
 resources:
   - name: app_repo
     type: GitRepo
