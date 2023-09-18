@@ -30,7 +30,7 @@ pipelines:
         type: PromoteBuild
         configuration:
           #inherits all the tags from bash
-          targetRepository: app_repo
+          # targetRepository: app_repo
           includeDependencies:   false
           status:  "promoted-status"
           comment: "Promoting to 1.0.1"
