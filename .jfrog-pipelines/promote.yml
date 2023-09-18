@@ -18,7 +18,7 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
-      buildName: build
+      buildName: npm_build
       buildNumber: 1.0.1
 
 pipelines:

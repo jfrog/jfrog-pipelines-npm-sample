@@ -17,6 +17,8 @@
 #     type: BuildInfo
 #     configuration:
 #       sourceArtifactory: venortso_artifactory
+#       buildName: npm_build
+#       buildNumber: 1.0.0
       
 #   - name: cron_trigger_npm
 #     type: CronTrigger
