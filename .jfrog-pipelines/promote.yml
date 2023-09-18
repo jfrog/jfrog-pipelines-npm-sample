@@ -13,6 +13,8 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
+      buildName: npm_build
+      buildNumber: 1.0.0
 
   - name: app_promoted_buildinfo
     type: BuildInfo
