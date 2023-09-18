@@ -2,7 +2,7 @@
 valuesFilePath: ./values.yml
 
 resources:
-  - name: npm_repo_jfp_example
+  - name: npm_repo_jfp_venortso
     type: GitRepo
     configuration:
       # SCM integration where the repository is located
@@ -13,10 +13,10 @@ resources:
         # Specifies which branches will trigger dependent steps
         include: master
 
-  - name: npm_buildinfo_jfp_example
+  - name: npm_buildinfo_jfp_venortso
     type: BuildInfo
     configuration:
-      sourceArtifactory: {{ .Values.myRepo.artifactory }}
+      sourceArtifactory: venortso_artifactory
       
   - name: cron_trigger_npm
     type: CronTrigger
@@ -24,28 +24,28 @@ resources:
       interval: '0 3 * * *'       
 
 pipelines:
-  - name: Npm_Quickstart
+  - name: venortso_npm_test
     steps:
       - name: npm_build_step
         type: NpmBuild
         configuration:
-          repositoryName: quickstarts-npm-virtual      # required, npm repository name on artifacctory
+          repositoryName: venortso-test-npm     # required, npm repository name on artifacctory
           sourceLocation: .      # required, location of package.json file
           integrations:
             - name:  {{ .Values.myRepo.artifactory }}  # required
           inputResources:
-            - name: npm_repo_jfp_example         # required
+            - name: npm_repo_jfp_venortso         # required
             - name: cron_trigger_npm
 
       - name: npm_publish_step
         type: NpmPublish
         configuration:
           # for payloadType npm:
-          repositoryName: quickstarts-npm-virtual        # required, npm repository name on artifactory
+          repositoryName: venortso-test-npm      # required, npm repository name on artifactory
           autoPublishBuildInfo: true       # optional
           integrations:
             - name: {{ .Values.myRepo.artifactory }}      # required
           inputSteps:
             - name: npm_build_step                # required
           outputResources:
-            - name: npm_buildinfo_jfp_example                 # optional
+            - name: npm_buildinfo_jfp_venortso                 # optional
