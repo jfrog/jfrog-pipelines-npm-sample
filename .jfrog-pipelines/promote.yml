@@ -1,13 +1,13 @@
 valuesFilePath: ./values.yml
 
 resources:
-  - name: app_repo
-    type: GitRepo
-    configuration:
-      gitProvider: {{ .Values.myRepo.gitProvider }}
-      path: {{ .Values.myRepo.path }}
-      branches:
-        include: master
+  # - name: app_repo
+  #   type: GitRepo
+  #   configuration:
+  #     gitProvider: {{ .Values.myRepo.gitProvider }}
+  #     path: {{ .Values.myRepo.path }}
+  #     branches:
+  #       include: master
 
   - name: app_buildinfo
     type: BuildInfo
@@ -30,7 +30,7 @@ pipelines:
         type: PromoteBuild
         configuration:
           #inherits all the tags from bash
-          # targetRepository: app_repo
+          targetRepository: {{ .Values.myRepo.targetRepo }}   # required 
           includeDependencies:   false
           status:  "promoted-status"
           comment: "Promoting to 1.0.1"
