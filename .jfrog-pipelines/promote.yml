@@ -18,6 +18,8 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
+      buildName: build
+      buildNumber: 1.0.1
 
 pipelines:
   - name: venortso_npm_promote
@@ -29,7 +31,7 @@ pipelines:
           targetRepository: app_repo
           includeDependencies:   false
           status:  "promoted-status"
-          comment: "Testing promotion"
+          comment: "Promoting to 1.0.1"
           inputResources:
             - name: app_buildinfo    # required
               trigger: false
