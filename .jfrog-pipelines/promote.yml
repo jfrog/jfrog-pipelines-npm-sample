@@ -9,14 +9,14 @@ resources:
   #     branches:
   #       include: master
 
-  - name: app_pre_promoted_buildinfo
+  - name: pre_promoted_buildinfo
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
       buildName: venortso_npm
       buildNumber: 3
 
-  - name: app_promoted_buildinfo
+  - name: promoted_buildinfo
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
@@ -48,9 +48,9 @@ pipelines:
           status:  "promoted-status"
           comment: "Promoting to 1.0.1"
           inputResources:
-            - name: app_pre_promoted_buildinfo   # required
+            - name: pre_promoted_buildinfo   # required
           outputResources:
-            - name: app_promoted_buildinfo   # required
+            - name: promoted_buildinfo   # required
 
         execution:
           onStart:

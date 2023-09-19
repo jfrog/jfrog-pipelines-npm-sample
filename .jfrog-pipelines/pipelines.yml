@@ -45,7 +45,7 @@ pipelines:
         configuration:
           # for payloadType npm:
           repositoryName: venortso-test-npm      # required, npm repository name on artifactory
-          autoPublishBuildInfo: true       # optional
+          # autoPublishBuildInfo: true       # optional
           integrations:
             - name: {{ .Values.myRepo.artifactory }}      # required
           inputSteps:
