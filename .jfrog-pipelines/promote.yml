@@ -32,6 +32,8 @@ pipelines:
           inputResources:
           - name: npm_repo_jfp_venortso
             trigger: false
+        integrations:
+            - name:  {{ .Values.myRepo.artifactory }}  # required
         execution:
             onExecute:
               - echo "Running Bash"
