@@ -29,11 +29,14 @@ pipelines:
       - name: fetch_conditions
         type: Bash
         configuration:
+          repositoryName: venortso-test-npm     # required, npm repository name on artifacctory
+          sourceLocation: .      # required, location of package.json file
+          integrations:
+            - name:  {{ .Values.myRepo.artifactory }}  # required
           inputResources:
-          - name: npm_repo_jfp_venortso
-            trigger: false
-          - integrations:
-              - name:  {{ .Values.myRepo.artifactory }}  # required
+            - name: npm_repo_jfp_venortso         # required
+              trigger: false
+            # - name: cron_trigger_npm
         execution:
             onExecute:
               - echo "Running Bash"
