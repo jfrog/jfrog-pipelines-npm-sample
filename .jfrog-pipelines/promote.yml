@@ -30,7 +30,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-          - name: GitRepo
+          - name: npm_repo_jfp_venortso
             trigger: false
         execution:
             onExecute:
