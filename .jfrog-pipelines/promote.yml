@@ -30,7 +30,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-          - name: app_repo
+          - name: GitRepo
             trigger: false
         execution:
             onExecute:
