@@ -20,8 +20,8 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
-      buildName: npm_build
-      buildNumber: 1.0.1
+      buildName: released_venortso_npm
+      buildNumber: 3
 
 pipelines:
   - name: venortso_npm_promote
