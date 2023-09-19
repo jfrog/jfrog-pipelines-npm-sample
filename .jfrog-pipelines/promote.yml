@@ -28,9 +28,10 @@ pipelines:
     steps:
       - name: fetch_conditions
         type: Bash
-        inputResources:
-        - name: app_repo
-          trigger: false
+        configurations:
+          inputResources:
+          - name: app_repo
+            trigger: false
         execution:
             onExecute:
               - echo "Running Bash"
