@@ -14,14 +14,12 @@ resources:
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
       buildName: venortso_npm
-      buildNumber: 3
 
   - name: promoted_buildinfo
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
       buildName: released_venortso_npm
-      buildNumber: 3
 
 pipelines:
   - name: venortso_npm_promote
@@ -33,7 +31,7 @@ pipelines:
             - name:  {{ .Values.myRepo.artifactory }}  # required
           inputResources:
             - name: npm_repo_jfp_venortso         # required
-              # trigger: false
+              trigger: false
             # - name: cron_trigger_npm
         execution:
             onExecute:
@@ -48,7 +46,7 @@ pipelines:
           condition: promote == "true"
           #inherits all the tags from bash
           targetRepository: {{ .Values.myRepo.targetRepo }}
-          copy: true
+          # includeDependencies:  false
           status:  "success"
           comment: "Promoting to 1.0.1"
           inputSteps:
@@ -57,6 +55,7 @@ pipelines:
             - name: pre_promoted_buildinfo   # required
           outputResources:
             - name: promoted_buildinfo   # required
+          copy: true
 
         execution:
           onStart:
