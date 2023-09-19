@@ -33,7 +33,7 @@ pipelines:
             - name:  {{ .Values.myRepo.artifactory }}  # required
           inputResources:
             - name: npm_repo_jfp_venortso         # required
-              trigger: false
+              # trigger: false
             # - name: cron_trigger_npm
         execution:
             onExecute:

@@ -2,4 +2,4 @@ myRepo:
   gitProvider: venortso_github
   artifactory: venortso_artifactory
   path: venortso/jfrog-pipelines-npm-sample
-  targetRepo: venortso-test-npm
+  targetRepo: venortso-promoted-npm
