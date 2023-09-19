@@ -29,8 +29,6 @@ pipelines:
       - name: fetch_conditions
         type: Bash
         configuration:
-          repositoryName: venortso-test-npm     # required, npm repository name on artifacctory
-          sourceLocation: .      # required, location of package.json file
           integrations:
             - name:  {{ .Values.myRepo.artifactory }}  # required
           inputResources:
