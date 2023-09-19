@@ -46,8 +46,10 @@ pipelines:
           #inherits all the tags from bash
           targetRepository: {{ .Values.myRepo.targetRepo }}
           includeDependencies:  false
-          status:  "promoted-status"
+          status:  "success"
           comment: "Promoting to 1.0.1"
+          inputSteps:
+              - name: fetch_conditions
           inputResources:
             - name: pre_promoted_buildinfo   # required
           outputResources:
