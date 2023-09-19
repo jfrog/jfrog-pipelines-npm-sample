@@ -15,6 +15,17 @@ resources:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
       buildName: venortso_npm
       buildNumber: 3
+  
+  - name: npm_repo_jfp_venortso
+    type: GitRepo
+    configuration:
+      # SCM integration where the repository is located
+      gitProvider: {{ .Values.myRepo.gitProvider }}
+      # Repository path, including org name/repo name
+      path: {{ .Values.myRepo.path }}
+      branches:
+        # Specifies which branches will trigger dependent steps
+        include: master
 
   - name: promoted_buildinfo
     type: BuildInfo

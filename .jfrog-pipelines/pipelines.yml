@@ -1,54 +1,54 @@
-#template: true   # required for local templates
-valuesFilePath: ./values.yml
+# #template: true   # required for local templates
+# valuesFilePath: ./values.yml
 
-resources:
-  - name: npm_repo_jfp_venortso
-    type: GitRepo
-    configuration:
-      # SCM integration where the repository is located
-      gitProvider: {{ .Values.myRepo.gitProvider }}
-      # Repository path, including org name/repo name
-      path: {{ .Values.myRepo.path }}
-      branches:
-        # Specifies which branches will trigger dependent steps
-        include: master
+# resources:
+#   - name: npm_repo_jfp_venortso
+#     type: GitRepo
+#     configuration:
+#       # SCM integration where the repository is located
+#       gitProvider: {{ .Values.myRepo.gitProvider }}
+#       # Repository path, including org name/repo name
+#       path: {{ .Values.myRepo.path }}
+#       branches:
+#         # Specifies which branches will trigger dependent steps
+#         include: master
 
-  - name: npm_buildinfo_jfp_venortso
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: venortso_artifactory
-      buildName: npm_build
-      buildNumber: 1.0.0
+#   - name: npm_buildinfo_jfp_venortso
+#     type: BuildInfo
+#     configuration:
+#       sourceArtifactory: venortso_artifactory
+#       buildName: npm_build
+#       buildNumber: 1.0.0
       
-  # - name: cron_trigger_npm
-  #   type: CronTrigger
-  #   configuration:
-  #     interval: '0 3 * * *'       
+#   # - name: cron_trigger_npm
+#   #   type: CronTrigger
+#   #   configuration:
+#   #     interval: '0 3 * * *'       
 
-pipelines:
-  - name: venortso_npm
-    steps:
-      - name: npm_build_step
-        type: NpmBuild
-        configuration:
-          repositoryName: venortso-test-npm     # required, npm repository name on artifacctory
-          sourceLocation: .      # required, location of package.json file
-          integrations:
-            - name:  {{ .Values.myRepo.artifactory }}  # required
-          inputResources:
-            - name: npm_repo_jfp_venortso         # required
-              trigger: false
-            # - name: cron_trigger_npm
+# pipelines:
+#   - name: venortso_npm
+#     steps:
+#       - name: npm_build_step
+#         type: NpmBuild
+#         configuration:
+#           repositoryName: venortso-test-npm     # required, npm repository name on artifacctory
+#           sourceLocation: .      # required, location of package.json file
+#           integrations:
+#             - name:  {{ .Values.myRepo.artifactory }}  # required
+#           inputResources:
+#             - name: npm_repo_jfp_venortso         # required
+#               trigger: false
+#             # - name: cron_trigger_npm
 
-      - name: npm_publish_step
-        type: NpmPublish
-        configuration:
-          # for payloadType npm:
-          repositoryName: venortso-test-npm      # required, npm repository name on artifactory
-          # autoPublishBuildInfo: true       # optional
-          integrations:
-            - name: {{ .Values.myRepo.artifactory }}      # required
-          inputSteps:
-            - name: npm_build_step                # required
-          outputResources:
-            - name: npm_buildinfo_jfp_venortso                 # optional
+#       - name: npm_publish_step
+#         type: NpmPublish
+#         configuration:
+#           # for payloadType npm:
+#           repositoryName: venortso-test-npm      # required, npm repository name on artifactory
+#           # autoPublishBuildInfo: true       # optional
+#           integrations:
+#             - name: {{ .Values.myRepo.artifactory }}      # required
+#           inputSteps:
+#             - name: npm_build_step                # required
+#           outputResources:
+#             - name: npm_buildinfo_jfp_venortso                 # optional
