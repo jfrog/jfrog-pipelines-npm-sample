@@ -48,7 +48,7 @@ pipelines:
           condition: promote == "true"
           #inherits all the tags from bash
           targetRepository: {{ .Values.myRepo.targetRepo }}
-          includeDependencies:  false
+          copy: true
           status:  "success"
           comment: "Promoting to 1.0.1"
           inputSteps:
