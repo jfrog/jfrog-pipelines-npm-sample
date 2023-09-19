@@ -28,7 +28,7 @@ pipelines:
     steps:
       - name: fetch_conditions
         type: Bash
-        configurations:
+        configuration:
           inputResources:
           - name: app_repo
             trigger: false
