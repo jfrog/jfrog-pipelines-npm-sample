@@ -14,14 +14,14 @@ resources:
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
       buildName: venortso_npm
-      buildNumber: 1.0.0
+      buildNumber: 3
 
   - name: promoted_buildinfo
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.myRepo.artifactory }}
-      buildName: released_venortso_npm
-      buildNumber: 1.0.1
+      buildName: venortso_npm_promoted
+      buildNumber: 3
 
 pipelines:
   - name: venortso_npm_promote
