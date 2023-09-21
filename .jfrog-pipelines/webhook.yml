@@ -13,7 +13,7 @@ resources:
 pipelines:
   - name: venortso_webhook_payload_test
     steps:
-        - name: Send Webhook Payload
+        - name: Send_Payload_Webhook
           type: Bash
 
           configuration:
