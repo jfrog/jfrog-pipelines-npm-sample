@@ -45,7 +45,15 @@ pipelines:
               - export key2=int_venortso_crendentials_key2
               - export key3=int_venortso_crendentials_key3
               - echo "key1 = ${key1}, key2 = ${key2}, key3 = ${key3}"
-              - [[ "$key1" == "value1" && "$key2" == "$value2" && "$key3" == "$value3" ]] && export promote=true || export promote=false
+              - if [ "$key1" == "value1" ] && [ "$key2" == "$value2" ] && [ "$key3" == "$value3" ]; then
+                  export promote=true
+                else
+                  export promote=false
+                fi
+              - if [ "$promote" == "false" ]; then
+                  echo "Promote is set to false. Failing the pipeline."
+                  exit 1
+                fi
             onComplete:
                 - echo "promote = ${promote}"
                  
