@@ -41,12 +41,12 @@ pipelines:
             onExecute:
               - echo "Running Bash"
               - add_run_variables promote="true"
-              - export key1=$int_venortso_crendentials_key1
-              - export key2=$int_venortso_crendentials_key2
-              - export key3=$int_venortso_crendentials_key3
-              - printenv int_venortso_crendentials_key1
-              - printenv int_venortso_crendentials_key2
-              - printenv int_venortso_crendentials_key3
+              - export key1=${int_venortso_credentials_key1}
+              - export key2=${int_venortso_credentials_key2}
+              - export key3=${int_venortso_credentials_key3}
+              - printenv int_venortso_credentials_key1
+              - printenv int_venortso_credentials_key2
+              - printenv int_venortso_credentials_key3
             
               - if [ "$key1" == "value1" ] && [ "$key2" == "value2" ] && [ "$key3" == "value3" ]; then export promote=true; else export promote=false; fi
               - echo "promote = ${promote}"
