@@ -3,3 +3,4 @@ myRepo:
   artifactory: venortso_artifactory
   path: venortso/jfrog-pipelines-npm-sample
   targetRepo: venortso-promoted-npm-local
+  tokenIntegration: venortso_jfrog_token
