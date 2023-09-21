@@ -46,6 +46,7 @@ pipelines:
               - export key3=int_venortso_crendentials_key3
               - echo "key1 = ${key1}, key2 = ${key2}, key3 = ${key3}"
               - if [ "$key1" == "value1" ] && [ "$key2" == "value2" ] && [ "$key3" == "value3" ]; then export promote=true; else export promote=false; fi
+              - echo "promote = ${promote}"
               - if [ "$promote" == "false" ]; then exit 1; fi
             onComplete:
                 - echo "promote = ${promote}"
