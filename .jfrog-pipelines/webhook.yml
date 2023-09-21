@@ -13,25 +13,18 @@ resources:
 pipelines:
   - name: venortso_webhook_payload_test
     steps:
-        - name: BashSend
+        - name: Send Webhook Payload
           type: Bash
 
           configuration:
-
-
             inputResources:
               - name: npm_repo_jfp_venortso         # required
                 trigger: false
 
           execution:
               onExecute:
-                #int_CJ_Platform_API_Token_accessToken for API access token
-                #int_CJ_Platform_API_Token_url for endpoint url
-
                 - echo "Running Bash"
-
-                #fetch latest build
-                - export response='{"promote": true, "data": {"key1": "value1", "key2": "value2"}}'
+                - export response="Test Payload"
                 - echo "response = ${response}"
 
                 #send response as payload
