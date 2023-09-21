@@ -40,7 +40,7 @@ pipelines:
         execution:
             onExecute:
               - echo "Running Bash"
-              - add_run_variables promote="true"
+              - add_run_variables promote="false"
               - export key1=${int_venortso_credentials_key1}
               - export key2=${int_venortso_credentials_key2}
               - export key3=${int_venortso_credentials_key3}
@@ -48,7 +48,12 @@ pipelines:
               - printenv int_venortso_credentials_key2
               - printenv int_venortso_credentials_key3
             
-              - if [ "$key1" == "value1" ] && [ "$key2" == "value2" ] && [ "$key3" == "value3" ]; then export promote=true; else export promote=false; fi
+            # Fetch flow includes:
+            # 1. Fetching the build number of the latest build
+            # 2. Fetching path of artifact from that build
+            # 3. Fetching properties of artifact
+
+              - if [ "$key1" == "value1" ] && [ "$key2" == "value2" ] && [ "$key3" == "value3" ]; then promote=true; else promote=false; fi
               - echo "promote = ${promote}"
               - if [ "$promote" == "false" ]; then exit 1; fi
             onComplete:

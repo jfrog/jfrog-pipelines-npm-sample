@@ -1,0 +1,38 @@
+resources:
+  - name: npm_repo_jfp_venortso
+    type: GitRepo
+    configuration:
+      # SCM integration where the repository is located
+      gitProvider: {{ .Values.myRepo.gitProvider }}
+      # Repository path, including org name/repo name
+      path: {{ .Values.myRepo.path }}
+      branches:
+        # Specifies which branches will trigger dependent steps
+        include: master
+
+pipelines:
+  - name: venortso_webhook_payload_test
+    steps:
+        - name: BashSend
+          type: Bash
+
+          configuration:
+
+
+            inputResources:
+              - name: npm_repo_jfp_venortso         # required
+                trigger: false
+
+          execution:
+              onExecute:
+                #int_CJ_Platform_API_Token_accessToken for API access token
+                #int_CJ_Platform_API_Token_url for endpoint url
+
+                - echo "Running Bash"
+
+                #fetch latest build
+                - export response='{"promote": true, "data": {"key1": "value1", "key2": "value2"}}'
+                - echo "response = ${response}"
+
+                #send response as payload
+                - curl -X POST -H "Content-Type:application/json" -d "${response}" https://webhook.site/3bf1e646-e0c0-4887-ba73-9dbc2869dd23
