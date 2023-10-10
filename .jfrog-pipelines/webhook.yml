@@ -1,0 +1,22 @@
+
+
+
+pipelines:
+  - name: venortso_webhook_payload_test.
+    steps:
+        - name: Send_Payload_Webhook
+          type: Bash
+
+          configuration:
+            inputResources:
+              - name: npm_repo_jfp_venortso         # required
+                trigger: false
+
+          execution:
+              onExecute:
+                - echo "Running Bash"
+                - export response="Test Payload"
+                - echo "response = ${response}"
+
+                #send response as payload
+                - curl -X POST -H "Content-Type:application/json" -d "${response}" https://webhook.site/3bf1e646-e0c0-4887-ba73-9dbc2869dd23
